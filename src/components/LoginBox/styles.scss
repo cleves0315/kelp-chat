@@ -1,0 +1,40 @@
+.login-box {
+  width: 330px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 10px #cfd1d3;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px 0;
+  div {
+    display: flex;
+    justify-content: center;
+  }
+  .sign-btns {
+    display: flex;
+    padding: 10px 0;
+    .sign-btn {
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      color: rgba(180, 184, 185, 0.83);
+    }
+    .active {
+      color: rgb(102, 179, 239);
+    }
+  }
+  .avatar-wrap {  
+    margin: 10px 0 30px;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgb(26, 188, 156);
+  }
+  // 提交按钮
+  .submit-btn {
+    margin: 10px 0;
+  }
+}
