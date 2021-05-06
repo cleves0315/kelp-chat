@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",  /* 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT' */
+    "module": "commonjs", /* 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015' */
+    "sourceMap": true, /* 生成相应的 '.map' 文件 */
+    "strict": true, /* 启用所有严格类型检查选项 */
+    "outDir": "./dist", /* 指定输出目录 */
+    "rootDir": "./src", /* 用来控制输出目录结构 --outDir. (输出目录的解构会与给定的rootDir目录解构一致) */
+    "strictNullChecks": false, /* 是否启用严格的 null 检查 （这里为否） */
+    "noImplicitAny": false, /* 在表达式和声明上有隐含的 any类型时是否报错 （这里为否）*/
+    "alwaysStrict": false, /* 是否以严格模式检查每个模块，并在每个文件里加入 'use strict' （这里为否）*/
+    "lib": ["ES6", "es2015", "dom", "esnext.asynciterable"],
+    "esModuleInterop": true,
+    "types": ["node"]
+  },
+  "include": ["./src/app.ts"],
+  "exclude": ["node_modules"],
+}

@@ -1,24 +1,18 @@
-const Router = require('koa-router')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const passport = require('koa-passport')
+// 控制层用来分发路由，处理传入的HTTP请求。
+import Router from 'koa-router'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import passport from 'koa-passport'
+import usersModel from '../models/users'
 
-const UserModel = require('../../models/users')
-const keys = require('../../config/keys')
-const validatorRegister = require('../../validation/register')
-const validatorLogin = require('../../validation/login')
+import keys from '../utils/keys'
+import { validatorLogin, validatorRegister } from '../utils/validation'
 
 const router = new Router()
 
-
-/**
- * 注册接口地址
- * @param name
- * @param password
- */
 router.post('/register', async ctx => {
   const result = ctx.request.body
-  const findResult = await UserModel.find({name: result.name})
+  const findResult = await usersModel.find({name: result.name})
 
   const { errors, isValid } = validatorRegister(result)
 
@@ -31,7 +25,7 @@ router.post('/register', async ctx => {
 
   // 不存在数据，则录入数据库
   if (!findResult.length) {
-    const newUser = new UserModel({
+    const newUser = new usersModel({
       name: result.name,
       password: result.password,
     })
@@ -55,17 +49,17 @@ router.post('/register', async ctx => {
       message: '该用户已存在'
     }
   }
-
 })
+
 
 /**
  * @desc 登录接口地址 返回token
  * @access 接口公开
  */
-router.post('/login', async ctx => {
-  const { name, password } = ctx.request.body
+ router.post('/login', async ctx => {
+  const { account, password } = ctx.request.body
 
-  const { errors, isValid } = validatorLogin({name, password})
+  const { errors, isValid } = validatorLogin({name: account, password})
 
   if (!isValid) {
     ctx.status = 400
@@ -74,7 +68,7 @@ router.post('/login', async ctx => {
   }
 
   // 查询数据
-  const userResult = await UserModel.find({ name })
+  const userResult = await usersModel.find({ name: account })
 
   if (!userResult.length) {
     ctx.status = 404
@@ -127,4 +121,4 @@ router.get(
 )
 
 
-module.exports = router.routes()
+export default router.routes()
