@@ -7,7 +7,7 @@ import config from './config/config'
 import DBConnect from './sequelize'
 import passportConfig from './utils/passport'
 
-import usersRouter from './controllers/users'
+import usersRouter from './controllers/user.controller'
 
 const app = new Koa()
 const router = new Router()

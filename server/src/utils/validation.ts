@@ -1,11 +1,13 @@
 import Validator from 'validator'
 import isEmpty from './is-empty'
 
+// 登录、注册表单
 interface LoginInput {
   name?: string;
   password?: string,
 }
 
+// 返回值
 interface Result {
   errors: LoginInput;
   isValid: Boolean,

@@ -1,7 +1,7 @@
 import { Strategy, ExtractJwt } from 'passport-jwt'
 
 import keys from './keys'
-import UserModels from '../models/users'
+import UserModel from '../models/users.model'
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -13,7 +13,7 @@ export default passport => {
     // jwt_payload: 登录接口生成的payload
     new Strategy(opts, async function(jwt_payload, done) {
       console.log('jwt_payload: ...');
-      const userResult = await UserModels.findById(jwt_payload.id)
+      const userResult = await UserModel.findById(jwt_payload.id)
       const user = {
         id: userResult.id,
         name: userResult.name,
