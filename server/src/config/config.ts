@@ -7,7 +7,7 @@ interface Config {
 }
 
 let config: Config = {
-  dataBase: 'mongodb+srv://dome1:demo1@cluster0.ffkwm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  dataBase: 'mongodb',
   dbOptions: { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
