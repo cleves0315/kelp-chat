@@ -10,8 +10,10 @@
     "noImplicitAny": false, /* 在表达式和声明上有隐含的 any类型时是否报错 （这里为否）*/
     "alwaysStrict": false, /* 是否以严格模式检查每个模块，并在每个文件里加入 'use strict' （这里为否）*/
     "lib": ["ES6", "es2015", "dom", "esnext.asynciterable"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node",
   },
-  "include": ["./src/app.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"],
+  
 }
