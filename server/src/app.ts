@@ -7,7 +7,8 @@ import config from './config/config'
 import DBConnect from './sequelize'
 import passportConfig from './utils/passport'
 
-import usersRouter from './controllers/user.controller'
+import userRouter from './controllers/user.controller'
+import chatRouter from './controllers/chat.controller'
 
 const app = new Koa()
 const router = new Router()
@@ -23,8 +24,8 @@ passportConfig(passport)
 // 配置路由
 app.use(router.routes()).use(router.allowedMethods())
 
-router.use('/api/users', usersRouter)
-
+router.use('/api/user', userRouter)
+router.use('/api/chat', chatRouter)
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {

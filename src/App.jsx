@@ -1,7 +1,10 @@
+import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import loadable from '@loadable/component';
+import loadable from '@loadable/component'
 
 function App() {
+  const i = 0
+
   return (
     <BrowserRouter>
       <div className="app">
@@ -11,7 +14,7 @@ function App() {
         </Switch>
       </div>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
