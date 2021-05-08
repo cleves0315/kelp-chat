@@ -3,14 +3,8 @@ import mongoose from 'mongoose'
 
 import config from '../config/config'
 
-const DBConnect:Function = () => {
-  mongoose.connect(config.dataBase, config.dbOptions)
-    .then(() => {
-      console.log('mongodb connected~');
-    })
-    .catch(err => {
-      console.log(err);
-    })
+const DBConnect: Function = () => {
+  return mongoose.connect(config.dataBase, config.dbOptions)
 }
 
 export default DBConnect

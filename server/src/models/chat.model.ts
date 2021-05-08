@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const ChatListSchema: Schema = new Schema({
+const ChatSchema: Schema = new Schema({
   content_type: {
     // 聊天内容类型
     type: String,
@@ -25,4 +25,4 @@ const ChatListSchema: Schema = new Schema({
   },
 })
 
-export default mongoose.model('chat_list', ChatListSchema)
+export default mongoose.model('chat', ChatSchema)

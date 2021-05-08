@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const ChatRoomSchema: Schema = new Schema({
+const GroupSchema: Schema = new Schema({
   targets: [
     {
       user: {
@@ -20,8 +20,8 @@ const ChatRoomSchema: Schema = new Schema({
   },
   updata_date: {
     type: Date,
-    default: true,
+    default: Date.now,
   },
 })
 
-export default mongoose.model('char_room', ChatRoomSchema)
+export default mongoose.model('group', GroupSchema)

@@ -7,15 +7,25 @@ import passport from 'koa-passport'
 import config from './config/config'
 import DBConnect from './sequelize'
 import passportConfig from './utils/passport'
+import { ServersContext } from './context'
+import { GroupService } from './services'
 
 import userRouter from './controllers/user.controller'
-import chatRouter from './controllers/chat.controller'
+import groupRouter from './controllers/group.controller'
 
 const app = new Koa()
 const router = new Router()
 
 // 连接数据库
 DBConnect()
+  .then(() => {
+    console.log('mongodb connected~')
+    ServersContext.getInstance()
+      .setGroupService(new GroupService())
+  })
+  .catch(err => {
+    console.log(err)
+  })
 
 app.use(cors(config.corsArgs))
 app.use(bodyParser())
@@ -26,7 +36,7 @@ passportConfig(passport)
 app.use(router.routes()).use(router.allowedMethods())
 
 router.use('/api/user', userRouter)
-router.use('/api/chat', chatRouter)
+router.use('/api/group', groupRouter)
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {

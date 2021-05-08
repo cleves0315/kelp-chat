@@ -15,9 +15,8 @@ export default passport => {
       console.log('jwt_payload: ...');
       const userResult = await UserModel.findById(jwt_payload.id)
       const user = {
-        id: userResult.id,
+        id: userResult._id,
         name: userResult.name,
-        email: userResult.email
       }
       
       if (user) {

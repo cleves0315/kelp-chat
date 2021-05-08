@@ -54,9 +54,9 @@ router.post('/register', async (ctx) => {
  * @access 接口公开
  */
 router.post('/login', async (ctx) => {
-  const { account, password } = ctx.request.body
+  const { name, password } = ctx.request.body
 
-  const { errors, isValid } = validatorLogin({ name: account, password })
+  const { errors, isValid } = validatorLogin({ name, password })
 
   if (!isValid) {
     ctx.status = 400
@@ -65,7 +65,7 @@ router.post('/login', async (ctx) => {
   }
 
   // 查询数据
-  const userResult = await UsersModel.find({ name: account })
+  const userResult = await UsersModel.find({ name })
 
   if (!userResult.length) {
     ctx.status = 404
