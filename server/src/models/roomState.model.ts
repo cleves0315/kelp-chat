@@ -4,18 +4,20 @@ const RoomStateSchema: Schema = new Schema({
   room: {
     type: String,
     ref: 'chat_room',
-    required: true
+    required: true,
   },
   user: {
     type: String,
     ref: 'user',
-    required: true
+    required: true,
   },
-  unread_state: {    // 未读消息状态
+  unread_state: {
+    // 未读消息状态
     num: {
+      // 未读数量
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
 })
 

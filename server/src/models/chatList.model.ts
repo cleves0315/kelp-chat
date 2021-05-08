@@ -1,27 +1,28 @@
 import mongoose, { Schema } from 'mongoose'
 
-const ChatListSchema:Schema = new Schema({
-  content_type: {    // 聊天内容类型
+const ChatListSchema: Schema = new Schema({
+  content_type: {
+    // 聊天内容类型
     type: String,
-    default: 'normal'
+    default: 'normal',
   },
   chat_room: {
     type: String,
-    required: true
+    required: true,
   },
   user: {
     type: String,
     ref: 'user',
-    required: true
+    required: true,
   },
   content: {
     type: String,
-    required: true
+    required: true,
   },
   create_date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 })
 
 export default mongoose.model('chat_list', ChatListSchema)

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Koa from 'koa'
 import Router from 'koa-router'
 import cors from 'koa2-cors'

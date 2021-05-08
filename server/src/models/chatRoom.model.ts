@@ -1,25 +1,26 @@
 import mongoose, { Schema } from 'mongoose'
 
-const ChatRoomSchema:Schema = new Schema({
+const ChatRoomSchema: Schema = new Schema({
   targets: [
     {
       user: {
         type: String,
         ref: 'user',
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   ],
-  name: {      // 房间名
+  name: {
+    // 房间名
     type: String,
   },
   create_date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updata_date: {
     type: Date,
-    default: true
+    default: true,
   },
 })
 
