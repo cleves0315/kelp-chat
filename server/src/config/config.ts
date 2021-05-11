@@ -16,7 +16,7 @@ const config: Config = {
   },
   corsArgs: { // cors 跨域配置
     origin (ctx) {
-        return 'http://localhost:3000';
+        return 'http://localhost:3000'
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'], // 需要获取其他字段时
     maxAge: 5,

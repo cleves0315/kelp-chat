@@ -8,7 +8,7 @@ import config from './config/config'
 import DBConnect from './sequelize'
 import passportConfig from './utils/passport'
 import { ServersContext } from './context'
-import { GroupService } from './services'
+import { GroupService, UserService } from './services'
 
 import userRouter from './controllers/user.controller'
 import groupRouter from './controllers/group.controller'
@@ -22,6 +22,7 @@ DBConnect()
     console.log('mongodb connected~')
     ServersContext.getInstance()
       .setGroupService(new GroupService())
+      .setUserService(new UserService())
   })
   .catch(err => {
     console.log(err)

@@ -1,4 +1,4 @@
-import { GroupService } from '../services'
+import { GroupService, UserService } from '../services'
 
 export class ServersContext {
   static setGroupService(arg0: GroupService) {
@@ -11,6 +11,16 @@ export class ServersContext {
       ServersContext.instance = new ServersContext()
     }
     return ServersContext.instance
+  }
+
+  // user
+  private _userService: UserService
+  public get userService(): UserService {
+    return this._userService
+  }
+  public setUserService(service: UserService): ServersContext {
+    this._userService = service
+    return this
   }
 
   // group

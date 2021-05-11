@@ -1,6 +1,5 @@
 import Router from 'koa-router'
 import passport from 'koa-passport'
-import GroupModel from '../models/group.model'
 import RoomStateModel from '../models/groupState.model'
 import { ServersContext } from '../context'
 
@@ -22,7 +21,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (ctx) =
       ...userList
     ]
     const { groupService } = ServersContext.getInstance()
-    await groupService.insertChatRoom({ targets, room_name })
+    await groupService.insertGroup({ targets, room_name })
       .then((chat_room) => {
         ctx.status = 200
         ctx.body = {
@@ -54,7 +53,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (ctx) =
 router.get('/', passport.authenticate('jwt', { session: false }), async ctx => {
   const { id } = ctx.state.user
   const { groupService } = ServersContext.getInstance()
-  const resultChatRoom = await groupService.findChatRoom(id)
+  const resultChatRoom = await groupService.findGroup(id)
 
   if (resultChatRoom.length) {
     ctx.status = 200
@@ -81,25 +80,10 @@ router.post('/join', passport.authenticate('jwt', { session: false }), async (ct
   const { room_id } = ctx.request.body
   const { groupService } = ServersContext.getInstance()
 
-  const findUserRoom = await GroupModel.find({
-    _id: room_id,
-    targets: {
-      $elemMatch: {
-        user: id
-      }
-    }
-  })
+  const findUserRoom = await groupService.findGroupUsers(id, room_id)
 
   if (!findUserRoom.length) {
-    await GroupModel.findOneAndUpdate(
-      { _id: room_id },
-      {
-        $push: {
-          targets: { user: id }
-        }
-      },
-      { new: true }
-    )
+    groupService.joinGroup(id, room_id)
 
     ctx.status = 200
     ctx.body = {
@@ -124,14 +108,9 @@ router.post('/exit', passport.authenticate('jwt', { session: false }), async ctx
   const { room_id } = ctx.request.body
   const { id } = ctx.state
 
-  await GroupModel.findOneAndUpdate(
-    { _id: room_id },
-    { 
-      $pull: {
-        targets: { user: id },
-      },
-    }
-  )
+  const { groupService } = ServersContext.getInstance()
+
+  groupService.exitGroup(id, room_id)
     .then(() => {
       ctx.state = 200
       ctx.body = {

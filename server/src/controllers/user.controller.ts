@@ -4,18 +4,22 @@ import Router from 'koa-router'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import passport from 'koa-passport'
-import UsersModel from '../models/users.model'
+import { ServersContext } from '../context'
 
 import keys from '../utils/keys'
 import { validatorLogin, validatorRegister } from '../utils/validation'
 
 const router = new Router()
 
+/**
+ * @desc 注册用户
+ * @access 接口公开
+ */
 router.post('/register', async (ctx) => {
   const result = ctx.request.body
-  const findResult = await UsersModel.find({ name: result.name })
-
+  const { userService } = ServersContext.getInstance()
   const { errors, isValid } = validatorRegister(result)
+  const findResult = await userService.findUsers(result.name)
 
   if (!isValid) {
     ctx.status = 400
@@ -24,17 +28,11 @@ router.post('/register', async (ctx) => {
   }
   // 不存在数据，则录入数据库
   if (!findResult.length) {
-    const newUser = new UsersModel({
-      name: result.name,
-      password: result.password,
-    })
-
     // 密码加密
     const salt = bcrypt.genSaltSync(10)
-    newUser.password = bcrypt.hashSync(newUser.password, salt)
+    const pswBcrypt = bcrypt.hashSync(result.password, salt)
 
-    await newUser
-      .save()
+    userService.insertUsers(result.name, pswBcrypt)
       .then((user) => {
         ctx.status = 200
         ctx.body = { code: 1, user }
@@ -49,12 +47,14 @@ router.post('/register', async (ctx) => {
     }
   }
 })
+
 /**
  * @desc 登录接口地址 返回token
  * @access 接口公开
  */
 router.post('/login', async (ctx) => {
   const { name, password } = ctx.request.body
+  const { userService } = ServersContext.getInstance()
 
   const { errors, isValid } = validatorLogin({ name, password })
 
@@ -65,7 +65,7 @@ router.post('/login', async (ctx) => {
   }
 
   // 查询数据
-  const userResult = await UsersModel.find({ name })
+  const userResult = await userService.findUsers(name)
 
   if (!userResult.length) {
     ctx.status = 404
