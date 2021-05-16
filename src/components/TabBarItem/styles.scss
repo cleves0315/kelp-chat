@@ -1,0 +1,11 @@
+.tab-bar-item {
+  text-align: center;
+  padding-bottom: 40px;
+  font-size: 25px;
+  .link {
+    color: #8a8a8a;
+  }
+  .active-link {
+    color: #66b3ef;
+  }
+}
