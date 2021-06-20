@@ -1,0 +1,43 @@
+.seach-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  padding: 0 10px;
+  border-bottom: 1px solid #f3eeee;
+  
+  .search-box,
+  .btn-box {
+    position: relative;
+    height: 25px;
+    .icon {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  
+  // 搜索框
+  .search-box {
+    // width: ;
+    .icon {
+      position: absolute;
+    }
+    .search-field {
+      height: 100%;
+      border: 0;
+      outline: none;
+      font-size: 14px;
+      padding-left: 35px;
+      border-radius: 4px;
+      background-color: #f6f7f9;
+    }
+  }
+
+  // 右侧按钮框
+  .btn-box {
+    .icon {
+      cursor: pointer;
+    }
+  }
+}

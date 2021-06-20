@@ -1,0 +1,26 @@
+.chat-msg-card {
+  display: flex;
+  padding: 0 10px;
+
+  .message-wrapper {
+    .info {
+      font-size: 14px;
+      color: #686868;
+      margin-bottom: 5px;
+    }
+
+    .msg {
+      .text {
+        color: #232323;
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        background: #fff;
+        border: 1px solid #E7E7E7;
+        &:hover {
+          background: #F6F6F6;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding: 0 20px;
+  background: #FFF;
+  border-bottom: 1px solid #f3eeee;
+
+  // 标题
+  .chat-title {
+    font-size: 18px;
+  }
+
+  // 右侧功能按钮区
+  .fnc-btns {
+    .icon {
+      width: 25px;
+      height: 25px;
+      margin-left: 15px;
+    }
+  }
+}
